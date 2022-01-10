@@ -12,30 +12,30 @@ import javax.persistence.OneToOne;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id; 
 	
-	private String name;
+	private String name; 
 	
 	@Column(length = 512)
-	private String address;
+	private String address; 
 	
-	private String city;
+	private String city; 
 	
 	@Column(nullable = false, unique = true)
 	private String panNumber;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	private UserInfo userInfo;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	private Account account;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private UserInfo userInfo; 
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Account account; 
+	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -85,7 +85,10 @@ public class Customer {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + ", panNumber="
+				+ panNumber + ", userInfo=" + userInfo + ", account=" + account + "]";
+	}
 }
