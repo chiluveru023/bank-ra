@@ -27,7 +27,7 @@ public class ServletConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		 .antMatchers("/customer").permitAll()
-
+		 .antMatchers("/user").authenticated()
 		 .anyRequest()
 		 .permitAll()
 		 .and()
