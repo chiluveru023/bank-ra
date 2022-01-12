@@ -16,6 +16,7 @@ String fetchFromAccountNumber(String username);
 @Modifying
 @Query("update Account a SET a.balance = a.balance-?2 where a.accountNumber=?1")
 void updateBalance(String fromAccountNumber, double amount);
+
 @Transactional
 @Modifying
 @Query("update Account a SET a.balance = a.balance+?2 where a.accountNumber=?1")

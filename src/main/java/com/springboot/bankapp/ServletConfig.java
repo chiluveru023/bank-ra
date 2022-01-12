@@ -29,6 +29,7 @@ public class ServletConfig extends WebSecurityConfigurerAdapter {
 		 .antMatchers("/customer").permitAll()
 		 .antMatchers("/user").authenticated()
 		 .antMatchers("/transfer").authenticated()
+		 .antMatchers("/statement/**/**").authenticated()
 		 .anyRequest()
 		 .permitAll()
 		 .and()
