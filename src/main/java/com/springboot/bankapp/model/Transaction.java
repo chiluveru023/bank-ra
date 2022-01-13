@@ -25,6 +25,7 @@ public class Transaction {
 	@Column(nullable = false)
 	private String operationType; 
 	
+	
 	@Column(nullable = false)
 	private double amount; 
 	
@@ -77,6 +78,12 @@ public class Transaction {
 
 	public void setDateOfTransaction(Date dateOfTransaction) {
 		this.dateOfTransaction = dateOfTransaction;
-	} 
+	}
+
+
+
+	
+
+	
 	
 }

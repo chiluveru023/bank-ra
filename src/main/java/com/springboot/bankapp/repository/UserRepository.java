@@ -21,4 +21,8 @@ void updateBalance(String fromAccountNumber, double amount);
 @Modifying
 @Query("update Account a SET a.balance = a.balance+?2 where a.accountNumber=?1")
 void creditAmount(String toAccountNumber, double amount);
+@Transactional
+@Modifying
+@Query("update Account a SET a.balance = a.balance+?2 where a.accountNumber=?1")
+void depositAmount(String accountNumber, double amount);
 }

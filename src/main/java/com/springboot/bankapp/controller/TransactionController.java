@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 import com.springboot.bankapp.dto.Transfer;
+import com.springboot.bankapp.model.Account;
 import com.springboot.bankapp.model.Transaction;
 import com.springboot.bankapp.service.TransactionService;
 import java.text.ParseException;
@@ -116,5 +117,33 @@ public class TransactionController {
 		} 
 
 		return  list;
+	}
+	@PostMapping("/deposit/{amount}")
+	public Transaction doDeposit(Principal principal,@PathVariable("amount") double amount) {
+		String username=principal.getName(); 
+		// Step 1: fetch account number based on username
+		String accountNumber = transactionService.fetchFromAccountNumber(username);
+	
+		//step:2 update the balance of the user and add the amount to the balance
+		transactionService.depositAmount(accountNumber, amount);
+		
+		//step:3 add an entry in transaction table
+		Transaction transaction = new Transaction();
+		
+		transaction.setAccountFrom(accountNumber);
+		transaction.setAccountTo(accountNumber);
+		transaction.setAmount(amount);
+		transaction.setOperationType("DEPOSIT");
+		transaction.setDateOfTransaction(new Date());
+		return transactionService.saveTransaction(transaction);
+
+	}
+	@GetMapping("/balance")
+	public double accountBalance(Principal principal) {
+		String username = principal.getName();
+		String accountNumber = transactionService.fetchFromAccountNumber(username);
+		Account account = transactionService.getAccountByAccountNumber(accountNumber);
+		return account.getBalance();
+		
 	}
 }
